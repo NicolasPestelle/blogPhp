@@ -5,7 +5,7 @@
 	
 	if($connect == true){
 		if(isset($_POST['titre'])){
-			if(isset($_POST['id'])){
+			if(isset($_POST['id'])){ //cas ou si c'est une modification d'article
 				$id = $_POST['id'];
 				$titre = mysql_real_escape_string($_POST['titre']);
 				$contenu = mysql_real_escape_string($_POST['contenu']);
@@ -13,7 +13,7 @@
 				$imgId = $id;
 				mysql_query($sql);
 				header("Location:index.php");
-			}else{
+			}else{//cas ou si c'est un nouvel article
 				$titre = mysql_real_escape_string($_POST['titre']);
 				$contenu = mysql_real_escape_string($_POST['contenu']);
 				date_default_timezone_set('UTC');
@@ -29,8 +29,6 @@
 			//On vérifie qu'il y a un fichier
 			if($_FILES['image']['error'] == 0){
 				$imgMaxSize = 1048576; //1Mo
-				//$img = explode("/", $_FILES['image']['type']);
-				//echo $img[1];
 				if($_FILES['image']['type'] == 'image/jpg' || $_FILES['image']['type'] == 'image/jpeg'){
 					if(filesize($_FILES['image']['tmp_name']) < $imgMaxSize && filesize($_FILES['image']['tmp_name']) > 0){
 						$imgReq = mysql_query('SELECT MAX(id) FROM articles;');
@@ -38,18 +36,18 @@
 						$cheminDest = dirname(__FILE__).'/data/images/'.$imgId.'.jpg';
 						move_uploaded_file($cheminSrc, $cheminDest);
 						header("Location:index.php");
-					}else{
+					}else{//gestion image trop grosse
 						echo '<div class="alert alert-warning">
 							<strong>Le fichier a upload est trop gros. (1Mo Max)</strong>
 						</div>';
 					}
 				}
-				else{
+				else{//gestion type image
 					echo '<div class="alert alert-warning">
 							<strong>Le format du fichier est incorrect JPG/JPEG uniquement !</strong>
 						</div>';
 				}
-			}else{
+			}else{//redirection aprés ajout/modif
 				header("Location:index.php");
 			}
 		}else{
@@ -63,9 +61,11 @@
 				$contenu = $data['contenu'];
 			}
 		}
-	}else{
+	}else{ // s'il n'est pas co alors on redirige autre part
 		header('Location:index.php');
 	}
+	
+	//formulaire
 ?>
 
 	<form action="article.php" method="post" enctype="multipart/form-data">

@@ -24,7 +24,7 @@
         <div class="page-header well">
           <h1>Mon Blog <small>Pour minitier à PHP</small></h1>
         </div>
-        
+
         <div class="row">
-        
+		
           <div class="span8">
