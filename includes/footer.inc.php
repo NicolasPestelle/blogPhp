@@ -6,9 +6,9 @@
 			
             <form action="index.php" method="post">
 			<div class="clearfix">
-				<input type="search" name="search" id="search">
+				<input type="text" name="search" id="search">
 			</div>
-			<input class="btn btn-default" id=rechercher" type="submit" value="Rechercher">
+			<input class="btn btn-default" id=rechercher" type="submit" value="rechercher">
 			</form>
 			
             <ul>
