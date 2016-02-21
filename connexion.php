@@ -3,6 +3,7 @@
 	include('includes/header.inc.php');
 	include('includes/verif_util.inc.php');
 	
+	// si la personne n'est pas connecté alors on affiche le formulaire
 	if($connect == false){
 		echo '<form action="connexion.php" method="post">
 			<div class="clearfix">
@@ -16,7 +17,7 @@
 			<input class="btn btn-primary" id="connexion" type="submit" value="Connecter">
 		</form>';
 		
-
+		//vérification + création du cookie
 		if(isset($_POST['email'])){
 			$email = mysql_real_escape_string($_POST['email']);
 			$mdp = mysql_real_escape_string(md5($_POST['mdp']));
