@@ -2,7 +2,7 @@
 	include('includes/connexion.inc.php');
 	include('includes/header.inc.php');
 	include('includes/verif_util.inc.php');
-	
+
 	if($connect == true){
 		if(isset($_POST['titre'])){
 			if(isset($_POST['id'])){ //cas ou si c'est une modification d'article
